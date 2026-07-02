@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "kling-3-0": {
+      "source": "agentspace-so/runcomfy-agent-skills",
+      "sourceType": "github",
+      "skillPath": "kling-3-0/SKILL.md",
+      "computedHash": "7945e3ee487f995d78765dfdd2e0a6b579fb86e8fbe7c1029a00d85bf208da19"
+    }
+  }
+}

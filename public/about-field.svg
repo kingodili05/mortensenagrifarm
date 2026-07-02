@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 520" width="680" height="520" role="img" aria-label="Rows of healthy crops growing in dark fertile soil at sunrise">
+  <defs>
+    <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde9b8"/>
+      <stop offset="0.55" stop-color="#cfe6c4"/>
+      <stop offset="1" stop-color="#cfe6c4"/>
+    </linearGradient>
+    <linearGradient id="earth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a3b2a"/>
+      <stop offset="1" stop-color="#2c2316"/>
+    </linearGradient>
+  </defs>
+  <rect width="680" height="280" fill="url(#dawn)"/>
+  <circle cx="360" cy="250" r="80" fill="#fcd34d" opacity="0.7"/>
+  <rect y="240" width="680" height="280" fill="url(#earth)"/>
+  <!-- crop rows -->
+  <g>
+    <g fill="#3f7d3a">
+      <g transform="translate(0,240)">
+        <g>
+          <path d="M60 60c-6-18 4-30 4-30 6 14-4 30-4 30Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g stroke="#6aa15e" stroke-width="3" opacity="0.8">
+    <line x1="60" y1="250" x2="-40" y2="520"/>
+    <line x1="190" y1="250" x2="150" y2="520"/>
+    <line x1="340" y1="250" x2="340" y2="520"/>
+    <line x1="490" y1="250" x2="530" y2="520"/>
+    <line x1="620" y1="250" x2="720" y2="520"/>
+  </g>
+  <!-- sprouts -->
+  <g fill="#4c9a45">
+    <g transform="translate(340,300)"><path d="M0 30C-4 10 -16 4 -16 4 -2 6 0 30 0 30ZM0 30C4 6 16 2 16 2 14 18 0 30 0 30Z"/></g>
+    <g transform="translate(250,360) scale(1.3)"><path d="M0 30C-4 10 -16 4 -16 4 -2 6 0 30 0 30ZM0 30C4 6 16 2 16 2 14 18 0 30 0 30Z"/></g>
+    <g transform="translate(440,370) scale(1.3)"><path d="M0 30C-4 10 -16 4 -16 4 -2 6 0 30 0 30ZM0 30C4 6 16 2 16 2 14 18 0 30 0 30Z"/></g>
+    <g transform="translate(150,450) scale(1.8)"><path d="M0 30C-4 10 -16 4 -16 4 -2 6 0 30 0 30ZM0 30C4 6 16 2 16 2 14 18 0 30 0 30Z"/></g>
+    <g transform="translate(540,460) scale(1.8)"><path d="M0 30C-4 10 -16 4 -16 4 -2 6 0 30 0 30ZM0 30C4 6 16 2 16 2 14 18 0 30 0 30Z"/></g>
+  </g>
+</svg>

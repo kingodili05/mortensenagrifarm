@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/*
+  Industrial-agri design system.
+  Forest green (trust/growth) + steel gray (equipment) + harvest yellow (accent/CTA).
+  Tokens are defined once here and consumed via Tailwind utility classes.
+*/
+@theme {
+  /* Brand — forest green */
+  --color-forest-50: #ecfdf3;
+  --color-forest-100: #d1fadf;
+  --color-forest-200: #a6f3c4;
+  --color-forest-300: #6ee7a3;
+  --color-forest-400: #34d27d;
+  --color-forest-500: #16a34a;
+  --color-forest-600: #15803d;
+  --color-forest-700: #166534;
+  --color-forest-800: #14532d;
+  --color-forest-900: #0c3a21;
+  --color-forest-950: #052e16;
+
+  /* Steel gray — equipment / structure */
+  --color-steel-50: #f8fafc;
+  --color-steel-100: #f1f5f9;
+  --color-steel-200: #e2e8f0;
+  --color-steel-300: #cbd5e1;
+  --color-steel-400: #94a3b8;
+  --color-steel-500: #64748b;
+  --color-steel-600: #475569;
+  --color-steel-700: #334155;
+  --color-steel-800: #1e293b;
+  --color-steel-900: #0f172a;
+  --color-steel-950: #060a14;
+
+  /* Harvest yellow — accent + CTA */
+  --color-harvest-300: #fde047;
+  --color-harvest-400: #facc15;
+  --color-harvest-500: #eab308;
+  --color-harvest-600: #ca8a04;
+
+  /* Surfaces */
+  --color-cream: #faf9f5;
+  --color-cream-dark: #f1efe7;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-steel-800);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Accessible focus ring for keyboard users across all interactive elements */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-harvest-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reveal-on-scroll utility (progressive enhancement, safe without JS) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s var(--ease-out-expo) both;
+}
+
+/* Subtle field-texture background for hero/CTA bands */
+.bg-field-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+

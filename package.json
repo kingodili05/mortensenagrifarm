@@ -1,0 +1,40 @@
+{
+  "name": "mortensen-agrisupply",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mortensen AgriSupply — farm manure (organic fertilizer) and agricultural equipment supplier serving the U.S., North America, Africa, and worldwide. A William Mortensen Company.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "remotion:studio": "remotion studio remotion/index.ts",
+    "render:story": "remotion render remotion/index.ts FarmStory public/story/farm-story.mp4 --codec=h264",
+    "render:poster": "remotion still remotion/index.ts FarmStory public/story/poster.jpg --frame=320"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^3.0.4",
+    "@remotion/cli": "^4.0.482",
+    "@remotion/transitions": "^4.0.482",
+    "gsap": "^3.15.0",
+    "next": "^16.2.9",
+    "postprocessing": "^6.39.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "remotion": "^4.0.482",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/node": "22.10.7",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "@types/three": "^0.184.1",
+    "eslint": "9.18.0",
+    "eslint-config-next": "^16.2.9",
+    "tailwindcss": "^4.3.1",
+    "typescript": "5.7.3"
+  }
+}

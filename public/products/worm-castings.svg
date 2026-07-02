@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" role="img" aria-label="Fine dark worm castings vermicompost soil amendment">
+  <rect width="600" height="450" fill="#e9eae6"/>
+  <!-- mound of fine castings -->
+  <ellipse cx="300" cy="360" rx="230" ry="70" fill="#2f2a22"/>
+  <path d="M90 360c20-70 80-120 210-120s190 50 210 120Z" fill="#3a342a"/>
+  <!-- fine grain texture dots -->
+  <g fill="#231f18">
+    <circle cx="220" cy="320" r="3"/><circle cx="250" cy="305" r="3"/>
+    <circle cx="290" cy="300" r="3"/><circle cx="330" cy="308" r="3"/>
+    <circle cx="370" cy="320" r="3"/><circle cx="240" cy="335" r="3"/>
+    <circle cx="300" cy="330" r="3"/><circle cx="360" cy="335" r="3"/>
+    <circle cx="270" cy="320" r="3"/><circle cx="340" cy="322" r="3"/>
+  </g>
+  <g fill="#54493a">
+    <circle cx="260" cy="312" r="2"/><circle cx="310" cy="318" r="2"/>
+    <circle cx="350" cy="312" r="2"/><circle cx="290" cy="325" r="2"/>
+  </g>
+</svg>

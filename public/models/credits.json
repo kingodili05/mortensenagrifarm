@@ -1,0 +1,32 @@
+{
+  "tractor": {
+    "title": "Tractor",
+    "author": "Poly by Google",
+    "license": "Creative Commons Attribution",
+    "page": "https://poly.pizza/m/5TGoA5N14c5"
+  },
+  "combine": {
+    "title": "Farm",
+    "author": "Poly by Google",
+    "license": "Creative Commons Attribution",
+    "page": "https://poly.pizza/m/dSjXKezYeBo"
+  },
+  "drone": {
+    "title": "Drone",
+    "author": "NateGazzard",
+    "license": "Creative Commons Attribution",
+    "page": "https://poly.pizza/m/DNbUoMtG3H"
+  },
+  "barn": {
+    "title": "Barn",
+    "author": "CreativeTrio",
+    "license": "Public Domain",
+    "page": "https://poly.pizza/m/A6UkPq33aZ"
+  },
+  "wheat": {
+    "title": "Field of wheat",
+    "author": "Poly by Google",
+    "license": "Creative Commons Attribution",
+    "page": "https://poly.pizza/m/cNX9BRNG6ep"
+  }
+}
