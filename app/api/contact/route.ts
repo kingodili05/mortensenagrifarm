@@ -3,7 +3,14 @@ import { NextResponse } from "next/server";
 // Server-side validation for the contact form.
 // Sends nothing externally yet — wire an email/CRM provider where marked below.
 
-const MAX = { name: 120, email: 200, country: 80, phone: 40, message: 4000 };
+const MAX = {
+  name: 120,
+  email: 200,
+  country: 80,
+  phone: 40,
+  message: 4000,
+  products: 600,
+};
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type ContactPayload = {
@@ -12,6 +19,7 @@ type ContactPayload = {
   country?: unknown;
   phone?: unknown;
   message?: unknown;
+  products?: unknown; // comma-separated product names from the quote list
   company_website?: unknown; // honeypot
 };
 
@@ -37,6 +45,7 @@ export async function POST(request: Request) {
   const country = asString(body.country);
   const phone = asString(body.phone);
   const message = asString(body.message);
+  const products = asString(body.products).slice(0, MAX.products);
 
   const errors: string[] = [];
   if (!name || name.length > MAX.name) errors.push("name");
@@ -63,6 +72,7 @@ export async function POST(request: Request) {
     country,
     hasPhone: phone.length > 0,
     messageLength: message.length,
+    quotedProducts: products ? products.split(",").length : 0,
   });
 
   return NextResponse.json({ ok: true });

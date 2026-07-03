@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Container, SectionHeading, ButtonLink } from "@/components/ui";
-import ProductCard from "@/components/ProductCard";
+import ProductCatalog from "@/components/ProductCatalog";
 import JsonLd from "@/components/JsonLd";
-import { Icon, type IconName } from "@/components/Icons";
-import { productsByCategory, CATEGORIES, PRODUCTS } from "@/lib/data";
+import { PRODUCTS } from "@/lib/data";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -38,36 +37,12 @@ export default function ProductsPage() {
         </Container>
       </section>
 
-      {CATEGORIES.map((cat) => {
-        const items = productsByCategory(cat.key);
-        return (
-          <section
-            key={cat.key}
-            id={cat.key}
-            className="scroll-mt-24 py-16 lg:py-20"
-          >
-            <Container>
-              <div className="flex items-center gap-4">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-forest-700 text-harvest-400">
-                  <Icon name={cat.icon as IconName} className="h-6 w-6" />
-                </span>
-                <div>
-                  <h2 className="font-display text-2xl font-bold text-steel-900 sm:text-3xl">
-                    {cat.title}
-                  </h2>
-                  <p className="mt-1 text-sm text-steel-600">{cat.blurb}</p>
-                </div>
-              </div>
-
-              <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((product) => (
-                  <ProductCard key={product.slug} product={product} />
-                ))}
-              </div>
-            </Container>
-          </section>
-        );
-      })}
+      {/* Interactive catalog: tabs, live search, quote-list on every card. */}
+      <section className="py-14 lg:py-16">
+        <Container>
+          <ProductCatalog />
+        </Container>
+      </section>
 
       {/* CTA */}
       <section className="bg-forest-700 py-16 text-white">

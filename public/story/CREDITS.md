@@ -9,3 +9,9 @@ Owner portrait (`/public/team/william-mortensen.jpg`) supplied by the client.
 
 Swap any image by replacing the file of the same name and re-running
 `npm run render:story`.
+
+# Product image credits
+
+Product photography (`/public/products/*.jpg`) sourced from **Unsplash**
+under the same Unsplash License (free commercial use, attribution optional).
+`worm-castings.jpg` reuses the story compost photo (`/story/05-compost.jpg`).

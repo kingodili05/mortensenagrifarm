@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import { QuoteProvider } from "@/components/quote/QuoteContext";
+import QuoteBar from "@/components/quote/QuoteBar";
 import { organizationJsonLd, localBusinessJsonLd } from "@/lib/seo";
 import { SITE, KEYWORDS } from "@/lib/site";
 
@@ -84,9 +86,12 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body>
         <JsonLd data={[organizationJsonLd(), localBusinessJsonLd()]} />
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <QuoteProvider>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <QuoteBar />
+        </QuoteProvider>
       </body>
     </html>
   );

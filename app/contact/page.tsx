@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { MailIcon, PhoneIcon, MapPinIcon } from "@/components/Icons";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
+import { Suspense } from "react";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -132,7 +133,10 @@ export default function ContactPage() {
               required.
             </p>
             <div className="mt-7">
-              <ContactForm />
+              {/* useSearchParams (quote-list prefill) requires a Suspense boundary. */}
+              <Suspense fallback={null}>
+                <ContactForm />
+              </Suspense>
             </div>
           </div>
         </Container>

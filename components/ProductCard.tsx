@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/data";
 import { CheckIcon } from "./Icons";
+import QuoteButton from "./quote/QuoteButton";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -43,9 +44,13 @@ export default function ProductCard({ product }: { product: Product }) {
           ))}
         </dl>
 
-        <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-forest-700">
-          <CheckIcon className="h-4 w-4" />
-          In stock — quoted {product.unit}
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <span className="flex items-center gap-2 text-sm font-semibold text-forest-700">
+            <CheckIcon className="h-4 w-4" />
+            In stock — {product.unit}
+          </span>
+          {/* z-10 keeps the button clickable above the card's stretched link. */}
+          <QuoteButton slug={product.slug} compact />
         </div>
       </div>
     </article>

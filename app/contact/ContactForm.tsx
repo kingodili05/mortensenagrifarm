@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { ArrowRightIcon, CheckIcon } from "@/components/Icons";
+import { useMemo, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
+import { ArrowRightIcon, CheckIcon, XIcon } from "@/components/Icons";
+import { PRODUCTS } from "@/lib/data";
+import { useQuote } from "@/components/quote/QuoteContext";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -27,6 +30,27 @@ const inputClass =
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
+  const searchParams = useSearchParams();
+  const { clear } = useQuote();
+
+  // Products carried over from the catalog quote list (?products=a,b,c).
+  const [removed, setRemoved] = useState<string[]>([]);
+  const selectedProducts = useMemo(() => {
+    const raw = searchParams.get("products");
+    if (!raw) return [];
+    return raw
+      .split(",")
+      .map((slug) => PRODUCTS.find((p) => p.slug === slug))
+      .filter((p): p is (typeof PRODUCTS)[number] => !!p)
+      .filter((p) => !removed.includes(p.slug));
+  }, [searchParams, removed]);
+
+  const defaultMessage = useMemo(() => {
+    if (selectedProducts.length === 0) return undefined;
+    return `Hello, I would like a quote for the following products:\n${selectedProducts
+      .map((p) => `• ${p.name} (${p.unit})`)
+      .join("\n")}\n\nVolume / quantity: \nDestination: `;
+  }, [selectedProducts]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +59,9 @@ export default function ContactForm() {
 
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    if (selectedProducts.length > 0) {
+      data.products = selectedProducts.map((p) => p.name).join(", ");
+    }
 
     // Honeypot — bots fill hidden fields; humans don't.
     if (data.company_website) {
@@ -59,6 +86,7 @@ export default function ContactForm() {
 
       setStatus("success");
       form.reset();
+      clear(); // quote list delivered — empty the basket
     } catch (err) {
       setStatus("error");
       setError(
@@ -187,6 +215,33 @@ export default function ContactForm() {
         </div>
       </div>
 
+      {/* Products carried over from the quote list */}
+      {selectedProducts.length > 0 && (
+        <div>
+          <p className="mb-1.5 block text-sm font-semibold text-steel-800">
+            Quoting for
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {selectedProducts.map((p) => (
+              <li
+                key={p.slug}
+                className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 py-1.5 pl-3.5 pr-2 text-sm font-semibold text-forest-800 ring-1 ring-inset ring-forest-200"
+              >
+                {p.name}
+                <button
+                  type="button"
+                  onClick={() => setRemoved((r) => [...r, p.slug])}
+                  aria-label={`Remove ${p.name} from quote`}
+                  className="rounded-full p-0.5 text-forest-500 hover:bg-forest-100 hover:text-forest-800"
+                >
+                  <XIcon className="h-3.5 w-3.5" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div>
         <label
           htmlFor="message"
@@ -198,8 +253,12 @@ export default function ContactForm() {
           id="message"
           name="message"
           required
-          rows={5}
+          rows={selectedProducts.length > 0 ? 8 : 5}
           className={inputClass}
+          // Remount when the carried-over product list changes so the
+          // prefilled draft stays in sync until the visitor edits it.
+          key={defaultMessage ?? "blank"}
+          defaultValue={defaultMessage}
           placeholder="Tell us the product, volume, and destination you need a quote for."
         />
       </div>

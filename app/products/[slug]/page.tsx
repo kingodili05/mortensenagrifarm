@@ -6,6 +6,7 @@ import { Container, ButtonLink, Eyebrow } from "@/components/ui";
 import ProductCard from "@/components/ProductCard";
 import JsonLd from "@/components/JsonLd";
 import { CheckIcon, ArrowRightIcon } from "@/components/Icons";
+import QuoteButton from "@/components/quote/QuoteButton";
 import {
   PRODUCTS,
   getProductBySlug,
@@ -122,12 +123,14 @@ export default async function ProductPage({ params }: Params) {
               </dl>
 
               <div className="mt-8 flex flex-wrap gap-4">
-                <ButtonLink href="/contact" variant="primary" withArrow>
+                <ButtonLink
+                  href={`/contact?products=${product.slug}`}
+                  variant="primary"
+                  withArrow
+                >
                   Request a Quote
                 </ButtonLink>
-                <ButtonLink href="/products" variant="secondary">
-                  Back to catalog
-                </ButtonLink>
+                <QuoteButton slug={product.slug} />
               </div>
             </div>
           </div>

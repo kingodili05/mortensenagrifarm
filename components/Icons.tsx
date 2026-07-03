@@ -21,6 +21,34 @@ function base(title?: string) {
   };
 }
 
+export function PlusIcon({ className, title }: IconProps) {
+  return (
+    <svg {...base(title)} className={className}>
+      {title && <title>{title}</title>}
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+export function XIcon({ className, title }: IconProps) {
+  return (
+    <svg {...base(title)} className={className}>
+      {title && <title>{title}</title>}
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
+
+export function SearchIcon({ className, title }: IconProps) {
+  return (
+    <svg {...base(title)} className={className}>
+      {title && <title>{title}</title>}
+      <circle cx="11" cy="11" r="7" />
+      <path d="m21 21-4.3-4.3" />
+    </svg>
+  );
+}
+
 export function LeafIcon({ className, title }: IconProps) {
   return (
     <svg {...base(title)} className={className}>
