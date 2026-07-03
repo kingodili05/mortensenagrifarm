@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useMemo, useRef, type MutableRefObject } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import {
   useGLTF,
   Center,
@@ -36,10 +36,10 @@ const TUNING: Record<string, Tuning> = {
 type Drive = { face: number; y: number; bank: number };
 const DRIVE: Record<string, Drive> = {
   "tractor.glb": { face: -Math.PI / 2, y: 0, bank: 0 },
-  // iedalton combine fleet (3 in a row). Verified live: at face=Math.PI the
-  // combines point at the camera and crab sideways — turn them into profile
-  // like the tractor so they drive along the travel direction.
-  "combine.glb": { face: -Math.PI / 2, y: 0, bank: 0 },
+  // iedalton combine fleet (3 in a row). Verified live: Math.PI faces the
+  // camera (crab-drive), -PI/2 drives header-backwards — +PI/2 puts the
+  // cutting headers in front along the travel direction.
+  "combine.glb": { face: Math.PI / 2, y: 0, bank: 0 },
   // Little Drone's length runs along X already — no 90° turn; it flies higher.
   "drone.glb": { face: 0, y: 0.8, bank: 0.12 },
 };
@@ -142,10 +142,15 @@ export default function ModelContents({
   src: string;
   progress?: ProgressRef;
 }) {
+  // Portrait phones have a much narrower horizontal FOV at the same camera
+  // distance, so desktop framing turns the vehicles into cropped close-ups.
+  // Pull the camera back and shrink the model slightly on narrow viewports.
+  const isNarrow = useThree((s) => s.size.width / s.size.height < 0.9);
+
   return (
     <>
       {/* Side-on, slightly above — frames the full drive path. */}
-      <PerspectiveCamera makeDefault position={[0, 1.3, 8]} fov={36} />
+      <PerspectiveCamera makeDefault position={[0, 1.3, isNarrow ? 12.5 : 8]} fov={36} />
       <ambientLight intensity={0.35} />
       <directionalLight
         position={[5, 9, 6]}
@@ -157,7 +162,9 @@ export default function ModelContents({
       <directionalLight position={[-6, 3, -4]} intensity={0.6} color="#facc15" />
       <Suspense fallback={null}>
         <Environment files="/hdri/env.hdr" environmentIntensity={0.85} />
-        <Model src={src} progress={progress} />
+        <group scale={isNarrow ? 0.8 : 1}>
+          <Model src={src} progress={progress} />
+        </group>
         {/* Wide grounded shadow — follows the model because ContactShadows
             renders the live scene depth each frame. */}
         <ContactShadows
