@@ -96,21 +96,31 @@ export default function ContactPage() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wide text-steel-500">
-                    Head office
+                    Offices
                   </p>
-                  <address className="text-lg font-semibold not-italic text-steel-900">
-                    {SITE.address.street}
-                    <br />
-                    {SITE.address.locality}, {SITE.address.region}{" "}
-                    {SITE.address.postalCode}, {SITE.address.countryName}
-                  </address>
+                  <div className="flex flex-col gap-4">
+                    {SITE.addresses.map((a) => (
+                      <address
+                        key={a.postalCode}
+                        className="text-lg font-semibold not-italic text-steel-900"
+                      >
+                        {a.street}
+                        <br />
+                        {a.locality}, {a.region} {a.postalCode},{" "}
+                        {a.countryName}
+                        <span className="ml-2 text-sm font-normal text-steel-500">
+                          {a.label}
+                        </span>
+                      </address>
+                    ))}
+                  </div>
                 </div>
               </li>
             </ul>
 
             <div className="mt-8 overflow-hidden rounded-2xl border border-steel-200 shadow-sm">
               <iframe
-                title={`Map showing ${SITE.name} head office`}
+                title={`Map showing ${SITE.name} Florida office`}
                 src={`https://maps.google.com/maps?q=${mapQuery}&z=12&output=embed`}
                 width="100%"
                 height="280"

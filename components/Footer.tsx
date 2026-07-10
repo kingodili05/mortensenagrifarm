@@ -66,13 +66,20 @@ export default function Footer() {
                 </a>
               </li>
             ))}
-            <li className="flex items-start gap-2.5 text-steel-400">
-              <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>
-                {SITE.address.street}, {SITE.address.locality},{" "}
-                {SITE.address.region} {SITE.address.postalCode}
-              </span>
-            </li>
+            {SITE.addresses.map((a) => (
+              <li
+                key={a.postalCode}
+                className="flex items-start gap-2.5 text-steel-400"
+              >
+                <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0" />
+                <span>
+                  {a.street}, {a.locality}, {a.region} {a.postalCode}
+                  <span className="ml-1.5 text-xs text-steel-500">
+                    ({a.label})
+                  </span>
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
 

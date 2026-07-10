@@ -3,14 +3,14 @@
 import { SITE } from "./site";
 import type { Product } from "./data";
 
-const postalAddress = {
+const postalAddresses = SITE.addresses.map((a) => ({
   "@type": "PostalAddress",
-  streetAddress: SITE.address.street,
-  addressLocality: SITE.address.locality,
-  addressRegion: SITE.address.region,
-  postalCode: SITE.address.postalCode,
-  addressCountry: SITE.address.country,
-};
+  streetAddress: a.street,
+  addressLocality: a.locality,
+  addressRegion: a.region,
+  postalCode: a.postalCode,
+  addressCountry: a.country,
+}));
 
 export function organizationJsonLd() {
   return {
@@ -26,7 +26,7 @@ export function organizationJsonLd() {
     founder: { "@type": "Person", name: SITE.owner },
     email: SITE.email,
     telephone: SITE.phone,
-    address: postalAddress,
+    address: postalAddresses,
     sameAs: [SITE.social.linkedin, SITE.social.facebook, SITE.social.x],
     areaServed: [
       "United States",
@@ -53,7 +53,7 @@ export function localBusinessJsonLd() {
     telephone: SITE.phone,
     email: SITE.email,
     priceRange: "$$",
-    address: postalAddress,
+    address: postalAddresses,
     geo: {
       "@type": "GeoCoordinates",
       latitude: SITE.geo.latitude,

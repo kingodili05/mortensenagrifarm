@@ -17,17 +17,40 @@ export const SITE = {
   // All contact numbers, rendered on Contact + Footer.
   phones: [
     { region: "South Carolina", display: "+1 (854) 840-4145", href: "+18548404145" },
+    { region: "South Carolina", display: "+1 (854) 204-8005", href: "+18542048005" },
     { region: "Florida", display: "+1 (386) 260-8241", href: "+13862608241" },
   ],
+  // Primary address — used for JSON-LD, map embed. First entry of `addresses`.
   address: {
-    street: "1450 Harvest Road",
-    locality: "Des Moines",
-    region: "IA",
-    postalCode: "50301",
+    street: "201 SW Billowing Gln",
+    locality: "Lake City",
+    region: "FL",
+    postalCode: "32024-3392",
     country: "US",
     countryName: "United States",
   },
-  geo: { latitude: 41.5868, longitude: -93.625 },
+  // All office locations, rendered on Contact + Footer.
+  addresses: [
+    {
+      label: "Florida",
+      street: "201 SW Billowing Gln",
+      locality: "Lake City",
+      region: "FL",
+      postalCode: "32024-3392",
+      country: "US",
+      countryName: "United States",
+    },
+    {
+      label: "South Carolina",
+      street: "1200 Ospery St",
+      locality: "North Charleston",
+      region: "SC",
+      postalCode: "29405-2620",
+      country: "US",
+      countryName: "United States",
+    },
+  ],
+  geo: { latitude: 30.1897, longitude: -82.6393 },
   foundingYear: 2009,
   social: {
     linkedin: "https://www.linkedin.com/company/mortensen-agrisupply",
