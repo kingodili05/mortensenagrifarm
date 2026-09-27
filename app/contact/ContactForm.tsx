@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { ArrowRightIcon, CheckIcon, XIcon } from "@/components/Icons";
 import { PRODUCTS } from "@/lib/data";
 import { useQuote } from "@/components/quote/QuoteContext";
+import { SmsConsentLabel } from "@/components/SmsConsentLabel";
+import { SMS_CONSENT_TEXT } from "@/lib/sms";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -30,6 +32,7 @@ const inputClass =
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
+  const [smsConsent, setSmsConsent] = useState(false);
   const searchParams = useSearchParams();
   const { clear } = useQuote();
 
@@ -62,6 +65,8 @@ export default function ContactForm() {
     if (selectedProducts.length > 0) {
       data.products = selectedProducts.map((p) => p.name).join(", ");
     }
+    data.smsConsent = String(smsConsent);
+    if (smsConsent) data.smsConsentText = SMS_CONSENT_TEXT;
 
     // Honeypot — bots fill hidden fields; humans don't.
     if (data.company_website) {
@@ -86,6 +91,7 @@ export default function ContactForm() {
 
       setStatus("success");
       form.reset();
+      setSmsConsent(false);
       clear(); // quote list delivered — empty the basket
     } catch (err) {
       setStatus("error");
@@ -214,6 +220,18 @@ export default function ContactForm() {
           />
         </div>
       </div>
+
+      <label className="flex items-start gap-3 rounded-xl border border-steel-200 bg-cream-dark p-4 text-sm leading-relaxed text-steel-700">
+        <input
+          type="checkbox"
+          checked={smsConsent}
+          onChange={(e) => setSmsConsent(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-steel-300 accent-forest-600 focus-visible:outline-none"
+        />
+        <span>
+          <SmsConsentLabel text={SMS_CONSENT_TEXT} />
+        </span>
+      </label>
 
       {/* Products carried over from the quote list */}
       {selectedProducts.length > 0 && (

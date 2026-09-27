@@ -4,6 +4,9 @@ export const SITE = {
   name: "Mortensen AgriSupply",
   legalTagline: "A William Mortensen Company",
   owner: "William Mortensen",
+  // Legal entity name as it appears on the IRS EIN letter. Placeholder until
+  // provided — required for A2P 10DLC / carrier compliance pages.
+  legalBusinessName: "[LEGAL BUSINESS NAME — must match IRS EIN letter]",
   // Live domain. Used for canonical URLs, OG, sitemap.
   url: "https://www.mortensenagri.farm",
   description:

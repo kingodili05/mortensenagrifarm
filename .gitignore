@@ -29,3 +29,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# SMS/TCPA consent record log (PII — never commit)
+/data/

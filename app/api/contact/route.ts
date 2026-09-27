@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { appendSmsOptIn, getRequestIp } from "@/lib/sms-optin-store";
 
 // Server-side validation for the contact form.
 // Sends nothing externally yet — wire an email/CRM provider where marked below.
@@ -20,6 +21,8 @@ type ContactPayload = {
   phone?: unknown;
   message?: unknown;
   products?: unknown; // comma-separated product names from the quote list
+  smsConsent?: unknown;
+  smsConsentText?: unknown;
   company_website?: unknown; // honeypot
 };
 
@@ -46,6 +49,8 @@ export async function POST(request: Request) {
   const phone = asString(body.phone);
   const message = asString(body.message);
   const products = asString(body.products).slice(0, MAX.products);
+  const smsConsent = asString(body.smsConsent) === "true";
+  const smsConsentText = asString(body.smsConsentText);
 
   const errors: string[] = [];
   if (!name || name.length > MAX.name) errors.push("name");
@@ -73,7 +78,26 @@ export async function POST(request: Request) {
     hasPhone: phone.length > 0,
     messageLength: message.length,
     quotedProducts: products ? products.split(",").length : 0,
+    smsConsent,
   });
+
+  // Contact form collects an optional phone number, so a checked SMS
+  // consent box here is a real TCPA opt-in — record it the same way as the
+  // dedicated /sms sign-up page.
+  if (smsConsent && phone) {
+    await appendSmsOptIn({
+      source: "contact-form",
+      name,
+      phone,
+      email,
+      smsConsent: true,
+      smsConsentText,
+      marketingConsent: false,
+      timestamp: new Date().toISOString(),
+      ip: getRequestIp(request),
+      userAgent: request.headers.get("user-agent") ?? "unknown",
+    });
+  }
 
   return NextResponse.json({ ok: true });
 }

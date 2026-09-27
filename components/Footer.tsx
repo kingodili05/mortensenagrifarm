@@ -93,22 +93,57 @@ export default function Footer() {
             <li>Europe &amp; Middle East</li>
             <li>Asia-Pacific &amp; Latin America</li>
           </ul>
+
+          <h2 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white">
+            Legal
+          </h2>
+          <ul className="mt-4 space-y-2.5 text-sm">
+            <li>
+              <Link
+                href="/privacy"
+                className="text-steel-400 transition-colors hover:text-harvest-400"
+              >
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terms"
+                className="text-steel-400 transition-colors hover:text-harvest-400"
+              >
+                Terms &amp; Conditions
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/sms"
+                className="text-steel-400 transition-colors hover:text-harvest-400"
+              >
+                Text Alerts
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
 
       <div className="border-t border-steel-800">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-steel-500 sm:flex-row sm:px-6 lg:px-8">
-          <p>
-            © <CopyrightYear /> {SITE.name}. {SITE.legalTagline}. All rights
-            reserved.
+        <div className="mx-auto max-w-7xl px-4 py-6 text-xs text-steel-500 sm:px-6 lg:px-8">
+          <p className="text-steel-400">
+            {SITE.legalBusinessName}, doing business as {SITE.name}
           </p>
-          <p>
-            Owned &amp; operated by{" "}
-            <span className="font-semibold text-steel-300">{SITE.owner}</span>.
-            <span className="ml-2 text-steel-600">
-              3D models via Poly Pizza (CC-BY).
-            </span>
-          </p>
+          <div className="mt-3 flex flex-col items-center justify-between gap-3 sm:flex-row">
+            <p>
+              © <CopyrightYear /> {SITE.name}. {SITE.legalTagline}. All rights
+              reserved.
+            </p>
+            <p>
+              Owned &amp; operated by{" "}
+              <span className="font-semibold text-steel-300">{SITE.owner}</span>.
+              <span className="ml-2 text-steel-600">
+                3D models via Poly Pizza (CC-BY).
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
